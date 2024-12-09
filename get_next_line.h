@@ -6,7 +6,7 @@
 /*   By: mel-hajj <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:12:55 by mel-hajj          #+#    #+#             */
-/*   Updated: 2024/12/02 16:49:51 by mel-hajj         ###   ########.fr       */
+/*   Updated: 2024/12/06 10:09:43 by mel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*get_next_line(int fd);
+char	*read_line(char **reminder);
+char	*full_reading(char **reminder);
 
 #endif

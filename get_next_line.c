@@ -6,7 +6,7 @@
 /*   By: mel-hajj <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:50:21 by mel-hajj          #+#    #+#             */
-/*   Updated: 2024/12/02 16:43:06 by mel-hajj         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:25:06 by mel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*read_line(char **reminder)
 	size_t	len;
 
 	if (!*reminder || !**reminder)
-		return (NULL);
+		return (free(reminder), reminder = NULL, NULL);
 	newline = ft_strchr(*reminder, '\n');
 	if (!newline)
 		return (full_reading(reminder));
@@ -49,7 +49,8 @@ char	*get_next_line(int fd)
 {
 	static char	*reminder;
 	char		*buffer;
-	int			bytes_read;
+	ssize_t		bytes_read;
+	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -60,16 +61,15 @@ char	*get_next_line(int fd)
 	while (bytes_read > 0)
 	{
 		buffer[bytes_read] = '\0';
-		reminder = ft_strjoin(reminder, buffer);
+		temp = ft_strjoin(reminder, buffer);
+		free(reminder);
+		reminder = temp;
 		if (ft_strchr(reminder, '\n'))
 			break ;
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
 	}
 	free(buffer);
-	if (bytes_read < 0)
-	{
-		free(reminder);
-		reminder = NULL;
-		return (NULL);
-	}
+	if (bytes_read < 0 || !reminder || !*reminder)
+		return (free(reminder), reminder = NULL, NULL);
 	return (read_line(&reminder));
 }

@@ -6,7 +6,7 @@
 /*   By: mel-hajj <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:52:42 by mel-hajj          #+#    #+#             */
-/*   Updated: 2024/12/02 15:20:49 by mel-hajj         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:43:43 by mel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_strdup(const char *s)
 	x = malloc(l + 1);
 	if (!x)
 		return (NULL);
+	i = 0;
 	while (s[i])
 	{
 		x[i] = s[i];
